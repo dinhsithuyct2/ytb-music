@@ -1,0 +1,8 @@
+{
+  "name": "Remix YouTube Music Web",
+  "description": "Trình phát nhạc YouTube Music trên trình duyệt với hỗ trợ đăng nhập Google, phát nhạc dưới nền, quản lý danh sách phát và tìm kiếm âm nhạc.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
