@@ -1,0 +1,40 @@
+name: Build and Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Nếu nhánh mặc định của bạn là "master", hãy sửa "main" thành "master"
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Tải toàn bộ source code về máy ảo GitHub
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # 2. Cài đặt môi trường Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3. Cài đặt các thư viện phụ thuộc (dependencies)
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Đóng gói mã nguồn thành bản hoàn chỉnh
+      - name: Build Project
+        run: npm run build
+
+      # 5. Đẩy thư mục đầu ra lên nhánh gh-pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist  # Lưu ý: Nếu dự án dùng Create React App, sửa './dist' thành './build'
